@@ -4,7 +4,7 @@
   "description": "Doomsday Network - Proof-of-Idle-Work Desktop Client",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "node init && electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
@@ -33,12 +33,20 @@
       {
         "from": "../core",
         "to": "core",
-        "filter": ["**/*", "!**/__pycache__/**", "!**/*.pyc"]
+        "filter": [
+          "**/*",
+          "!**/__pycache__/**",
+          "!**/*.pyc"
+        ]
       },
       {
         "from": "../miner",
         "to": "miner",
-        "filter": ["**/*", "!**/__pycache__/**", "!**/*.pyc"]
+        "filter": [
+          "**/*",
+          "!**/__pycache__/**",
+          "!**/*.pyc"
+        ]
       }
     ],
     "win": {

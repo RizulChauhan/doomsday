@@ -4,7 +4,12 @@
   "private": true,
   "description": "Zero-dependency TypeScript MCP stdio server for public issuer-reported Doomsday escrow with optional gated faucet",
   "type": "module",
-  "engines": {"node": ">=22.6.0"},
-  "scripts": {"test": "node --experimental-strip-types --test server.test.mts", "start": "node --experimental-strip-types server.mts"},
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "scripts": {
+    "test": "node --experimental-strip-types --test server.test.mts",
+    "start": "node init && node --experimental-strip-types server.mts"
+  },
   "license": "MIT"
 }
