@@ -1,0 +1,1 @@
+fix(airdrop_bot): paginate GitHub issue comments (per_page=100) for issues with  comments
