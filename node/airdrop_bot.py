@@ -403,10 +403,17 @@ def poll_once(gh_token: str) -> None:
         headers["Authorization"] = f"token {gh_token}"
 
     for repo, issue_num, reward_doom in WATCHED_ISSUES:
+        comments: List[Dict[str, Any]] = []
         try:
-            url = f"https://api.github.com/repos/{repo}/issues/{issue_num}/comments?per_page=50"
-            req = urllib.request.Request(url, headers=headers)
-            comments = json.loads(urllib.request.urlopen(req, timeout=15).read().decode())
+            for page in range(1, 11):
+                url = f"https://api.github.com/repos/{repo}/issues/{issue_num}/comments?per_page=100&page={page}"
+                req = urllib.request.Request(url, headers=headers)
+                page_comments = json.loads(urllib.request.urlopen(req, timeout=15).read().decode())
+                if not isinstance(page_comments, list) or not page_comments:
+                    break
+                comments.extend(page_comments)
+                if len(page_comments) < 100:
+                    break
         except Exception as e:
             print(f"[AirdropBot] Poll error on {repo}#{issue_num}: {e}")
             continue
